@@ -40,17 +40,20 @@ export default {
       this.$router.push({ name: 'design-color' });
     },
     designForward: function () {
+      // move through the design selections
       if (this.currentIndex < this.designs.length - 1) {
         this.currentIndex += 1;
       }
     },
     designBack: function () {
+      // move back through the design selections
       if (this.currentIndex > 0) {
         this.currentIndex -= 1;
       }
     }
   },
   created () {
+    // display the design previously selected
     if (this.$store.state.selectedDesign !== null) {
       this.currentIndex = this.$store.state.selectedDesign;
     }

@@ -36,6 +36,7 @@ export default {
     }
   },
   created () {
+    // retrieve the primary color, selected color scheme and selected design from the global store
     if (this.$store.state.selectedDesign !== null) {
       this.currentIndex = this.$store.state.selectedDesign;
     }
@@ -53,8 +54,10 @@ export default {
     }
   },
   mounted () {
+    // bind the SVG shape clicks
     document.querySelectorAll('svg polygon, svg polyline, svg rect, svg path').forEach((shape) => {
       shape.addEventListener('click', (e) => {
+        // fill SVG shape with stored color
         e.target.style.fill = this.$store.state.currentColoringValue;
       });
     });

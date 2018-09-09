@@ -15,6 +15,7 @@ export default new Vuex.Store({
   mutations: {
     selectColor (state, color) {
       state.selectedColor = color;
+      // if a new color is selected, force generate new color scheme information
       state.selectedScheme = null;
       state.generatedSchemes = [];
     },

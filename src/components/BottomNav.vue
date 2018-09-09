@@ -1,8 +1,10 @@
 <template>
+  <!--when swipe up on coloring panel expand full bottom nav-->
   <div class="bottom-bar"  v-bind:style="{ height: showColoringPanel ? '26vh' : 'inherit', transform: showColoringPanel && menuCollapsed ? 'translateY(12vh)' : 'translateY(0)' }" v-touch="{
       up: menuExpand,
       down: menuCollapse
     }">
+    <!--only show the coloring panel sometimes-->
     <ColoringPanel v-if="showColoringPanel" />
     <div class="control-panel">
       <button type="button" v-bind:style="backButtonStyle" :disabled="!backHandler" v-on:click="backHandler()"><img src="@/assets/back-arrow.png" alt=""/></button>

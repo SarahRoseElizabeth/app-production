@@ -3,6 +3,7 @@
       left: schemeForward,
       right: schemeBack
     }">
+    <!--fill the color scheme containers with default background colors until a color scheme is selected-->
     <div class="side-swatch" v-bind:style="{ backgroundColor: generatedSchemes.length ? generatedSchemes[currentIndex][0].hex.value : defaultBackgrounds[0] }"><h1>{{ generatedSchemes.length ? generatedSchemes[currentIndex][0].hex.value : defaultSwatchText }}</h1></div>
     <div class="side-swatch" v-bind:style="{ backgroundColor: generatedSchemes.length ? generatedSchemes[currentIndex][1].hex.value : defaultBackgrounds[1] }"><h1>{{ generatedSchemes.length ? generatedSchemes[currentIndex][1].hex.value : defaultSwatchText }}</h1></div>
     <div class="side-swatch" v-bind:style="{ backgroundColor: generatedSchemes.length ? generatedSchemes[currentIndex][2].hex.value : defaultBackgrounds[2] }"><h1>{{ generatedSchemes.length ? generatedSchemes[currentIndex][2].hex.value : defaultSwatchText }}</h1></div>
@@ -35,10 +36,13 @@ export default {
         this.schemeBack();
       }
     });
+    // if generated schemes are already found in the global store then don't generate new schemes
     if (this.$store.state.selectedScheme !== null && this.$store.state.generatedSchemes.length) {
       this.currentIndex = this.$store.state.selectedScheme;
       this.generatedSchemes = this.$store.state.generatedSchemes;
     } else {
+      // use api to generate analogous, complimentary, triadic and quadratic color schemes:
+      // http://www.thecolorapi.com/docs
       axios
         .all([
           axios.get(`http://www.thecolorapi.com/scheme?hex=${this.selectedColor.slice(1)}&mode=analogic&count=4`),
@@ -46,6 +50,7 @@ export default {
           axios.get(`http://www.thecolorapi.com/scheme?hex=${this.selectedColor.slice(1)}&mode=triad&count=4`),
           axios.get(`http://www.thecolorapi.com/scheme?hex=${this.selectedColor.slice(1)}&mode=quad&count=4`)
         ])
+        // store the color schemes in an array
         .then(axios.spread((analogic, complement, triad, quad) => {
           let arr = [];
           (analogic.data && analogic.data.colors) && arr.push(analogic.data.colors);
@@ -68,9 +73,11 @@ export default {
     currentIndex: 0
   }),
   methods: {
+    // move forward through the color scheme array
     schemeForward: function () {
       if (this.currentIndex < this.generatedSchemes.length - 1) this.currentIndex += 1;
     },
+    // move backwards through the color scheme array
     schemeBack: function () {
       if (this.currentIndex > 0) this.currentIndex -= 1;
     },

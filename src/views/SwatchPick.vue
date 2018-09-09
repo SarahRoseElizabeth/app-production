@@ -18,10 +18,14 @@
 import BottomNav from '@/components/BottomNav.vue';
 import hexRgb from 'hex-rgb';
 
+// Generation of hex code taken from:
+// https://www.paulirish.com/2009/random-hex-color-code-snippets/
 function generateNewHex () {
   return '#' + ('000000' + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
 }
 
+// Calculation of contrasting color taken and adapted from:
+// https://codepen.io/davidhalford/pen/ywEva
 function getContrastingColor (hex) {
   const threshold = 200;
   const trimmedHex = (hex.charAt(0) === '#') ? hex.substring(1, 7) : hex;
@@ -55,11 +59,13 @@ export default {
   },
   methods: {
     confirmHandler: function () {
+      // store selected swatch in global store and push to schemePick page
       this.$store.commit('selectColor', this.$data.currentIndex);
       this.$store.commit('setPrevColors', this.$data.previousColors);
       this.$router.push({ name: 'scheme' });
     },
     swatchForward: function () {
+      // display color swatches as you move through the array and generate a new one once you reach the end
       if (this.$data.currentIndex < this.$data.previousColors.length - 1) {
         const nextColor = this.$data.previousColors[this.$data.currentIndex + 1];
         this.$data.generatedColor = nextColor;
@@ -78,6 +84,7 @@ export default {
       }
     },
     swatchBack: function () {
+      // display the stored color swatches as you move back through the array
       const previousColor = this.$data.previousColors[Math.max(this.$data.currentIndex - 1, 0)];
       this.$data.generatedColor = previousColor;
       this.$data.generatedColorRgb = hexRgb(previousColor);
@@ -87,6 +94,7 @@ export default {
     }
   },
   created: function () {
+    // get selected color from the global store
     if (this.$store.state.selectedColor !== null) {
       this.previousColors = this.$store.state.previousColors || [];
       if (this.previousColors.length) {

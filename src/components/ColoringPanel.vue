@@ -2,6 +2,7 @@
   <div class="coloring-panel-container">
     <div class="pull-tab"><img src="@/assets/tab.png" alt=""/></div>
     <div class="color-container">
+      <!--fill coloring panel swatches with primary color and selected color scheme values-->
       <div class="single-swatch" v-bind:class="{ selected: selectedSwatchButton === 0 }" v-on:click="swatchClickHandler($event, 0)" v-bind:style="{ backgroundColor: swatchButtonColors[0] }"></div>
       <div class="single-swatch" v-bind:class="{ selected: selectedSwatchButton === 1 }" v-on:click="swatchClickHandler($event, 1)" v-bind:style="{ backgroundColor: swatchButtonColors[1] }"></div>
       <div class="single-swatch" v-bind:class="{ selected: selectedSwatchButton === 2 }" v-on:click="swatchClickHandler($event, 2)" v-bind:style="{ backgroundColor: swatchButtonColors[2] }"></div>
@@ -25,6 +26,7 @@ export default {
     ]
   }),
   created () {
+    // put all of the coloring values into an array if they exist in the global store
     if (this.$store.state.generatedSchemes.length &&
         this.$store.state.selectedScheme !== null &&
         this.$store.state.previousColors.length &&
@@ -36,6 +38,7 @@ export default {
         this.$store.state.generatedSchemes[this.$store.state.selectedScheme][1].hex.value,
         this.$store.state.generatedSchemes[this.$store.state.selectedScheme][0].hex.value
       ];
+      // put the current selected color into the global store to be used on design color screen
       this.$store.commit('currentColoringValue', this.swatchButtonColors[this.selectedSwatchButton || 0]);
     }
   },

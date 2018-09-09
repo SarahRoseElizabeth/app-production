@@ -4,6 +4,7 @@
   </div>
 </template>
 
+<!--global styles-->
 <style lang="less">
 @import 'assets/css/animate.min.css';
 
