@@ -69,12 +69,14 @@ export default {
 <style>
   .design-outline {
     overflow: hidden;
+    background-color: #4c4c4d;
+    width: 100vw;
+    height: 88vh;
   }
   .design-outline svg {
     position: absolute;
     object-fit: contain;
     width: 100vw;
     height: 88vh;
-    background-color: #4c4c4d;
   }
 </style>
