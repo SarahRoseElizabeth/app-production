@@ -91,7 +91,6 @@ export default {
     margin: 0;
   }
   .side-swatch {
-    background-color: lightsalmon;
     height: 15vh;
     width: 100vw;
     display: flex;

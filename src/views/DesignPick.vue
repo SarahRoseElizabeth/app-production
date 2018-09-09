@@ -3,7 +3,11 @@
       left: designForward,
       right: designBack
     }">
-     <div class="design-outline"><div v-bind:is="designs[currentIndex]"></div></div>
+     <div class="design-outline">
+       <transition name="designAnim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <div v-bind:is="designs[currentIndex]"></div>
+       </transition>
+     </div>
     <BottomNav :back-handler="backHandler" :confirm-handler="confirmHandler"  />
   </div>
 </template>
@@ -36,10 +40,14 @@ export default {
       this.$router.push({ name: 'design-color' });
     },
     designForward: function () {
-      if (this.currentIndex < this.designs.length - 1) this.currentIndex += 1;
+      if (this.currentIndex < this.designs.length - 1) {
+        this.currentIndex += 1;
+      }
     },
     designBack: function () {
-      if (this.currentIndex > 0) this.currentIndex -= 1;
+      if (this.currentIndex > 0) {
+        this.currentIndex -= 1;
+      }
     }
   },
   created () {
@@ -61,11 +69,12 @@ export default {
 <style>
   .design-outline {
     overflow: hidden;
-    background-color: #4c4c4d;
   }
   .design-outline svg {
+    position: absolute;
     object-fit: contain;
     width: 100vw;
     height: 88vh;
+    background-color: #4c4c4d;
   }
 </style>

@@ -116,6 +116,7 @@ export default {
     width: 100vw;
     height: 100vh;
     position: relative;
+    transition: background-color 0.5s;
   }
   .text-container{
     position: absolute;
