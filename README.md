@@ -1,7 +1,7 @@
 # Welcome to Hue Circle!
 
 This is a PhoneGap App built using the Vue.JS framework.
-1. The traditional phonegap `/www` folder contains code from the build process. The actual source code is in `/src` with the screens in `/src/views` and the sub-components in `/src/comopnents`. 
+1. The traditional phonegap `/www` folder contains code from the build process. The actual source code is in `/src` with the screens in `/src/views` and the sub-components in `/src/components`. 
 1. `App.vue` is the root view/component, `router.js` shows what the routes are for each screen, and `store.js` is the global app data store for things that need to go between screens.
 1. The root `index.html` is in `/public`.
 
