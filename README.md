@@ -1,4 +1,5 @@
 # Welcome to Hue Circle!
+Github reference: https://github.com/SarahRoseElizabeth/app-production/
 
 This is a PhoneGap App built using the Vue.JS framework.
 1. The traditional phonegap `/www` folder contains code from the build process. The actual source code is in `/src` with the screens in `/src/views` and the sub-components in `/src/components`. 
@@ -25,7 +26,7 @@ npm run build
 
 # Hue Circle - PhoneGap App
 
-Use the `/www` folder as usual for PhoneGap.
+Use the `/www` folder as usual for PhoneGap. Note that the `config.xml` file is in the parent folder, and not `/www`, so use the parent folder for PhoneGap desktop.
 
 ### Building on PhoneGap Build:
 
